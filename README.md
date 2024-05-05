@@ -1,5 +1,20 @@
-# My Universal React Project
+# SocialNet - Interactive Social Media App
 
+Welcome to SocialNet, your personalized social media platform for connecting with friends, sharing moments, and discovering new content. Below is an overview of the features and technologies used in our app.
+
+Overview
+
+SocialNet is an interactive social media app designed for both Android and iOS platforms. It provides users with a seamless experience for sharing photos, videos, stories, and engaging with friends and followers. With a user-friendly interface and advanced features, MySocialNet aims to redefine social networking.
+Technologies Used
+
+IDE: VScode
+Frontend: JavaScript with React-Native framework for building the mobile app's frontend.
+Backend: Node.js for server-side development and handling APIs.
+Database and Cloud Services: Firebase for user authentication, real-time database, storage, and cloud functions.
+UI/UX Design: Intuitive and user-friendly interface designed to enhance user experience.
+How to Use
+
+Currently, MySocialNet is not publicly available. However, stay tuned for future updates on its release and availability on app stores.
 <p>
   <!-- iOS -->
   <a href="https://itunes.apple.com/app/apple-store/id982107779">
