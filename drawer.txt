@@ -1,0 +1,162 @@
+
+
+
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { Divider } from 'react-native-elements';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
+
+// Your icon data
+const bottomTabIcons = [
+  // ... (other icons)
+  {
+    name: 'Home',
+    active: require('../../assets/Home.png'),
+    inactive: require('../../assets/Home.png'),
+},
+{
+    name: 'Search',
+    active: require('../../assets/search.png'),
+    inactive: require('../../assets/search.png'),
+},
+{
+    name: 'Plus',
+    active: require('../../assets/plus.png'),
+    inactive: require('../../assets/plus.png'),
+},
+{      
+
+    name: 'Reels',
+    active: require('../../assets/reel.png'),
+    inactive: require('../../assets/reel.png'),
+},
+  {
+    name: 'user',
+    active: require('../../userphoto/user1.jpg'),
+    inactive: require('../../userphoto/user1.jpg'),
+  },
+];
+
+// Dummy components for demonstration, replace them with your actual components
+const UserProfile = () => <Text>User Profile Component</Text>;
+const Clubs = () => <Text>Clubs Component</Text>;
+const Saved = () => <Text>Saved Component</Text>;
+const Activity = () => <Text>Activity Component</Text>;
+const Settings = () => <Text>Settings Component</Text>;
+
+const DrawerContent = ({ navigation }) => {
+  return (
+    <DrawerContentScrollView>
+      {/* Display additional items with icons */}
+      <DrawerItem
+        label="User Profile"
+        onPress={() => navigation.navigate('UserProfile')}
+        icon={() => <Image source={require('../../assets/search.png')} style={styles.drawerIcon} />}
+      />
+      <DrawerItem
+        label="Clubs"
+        onPress={() => navigation.navigate('Clubs')}
+        icon={() => <Image source={require('../../assets/search.png')} style={styles.drawerIcon} />}
+      />
+      <DrawerItem
+        label="Saved"
+        onPress={() => navigation.navigate('Saved')}
+        icon={() => <Image source={require('../../assets/search.png')} style={styles.drawerIcon} />}
+      />
+      <DrawerItem
+        label="Activity"
+        onPress={() => navigation.navigate('Activity')}
+        icon={() => <Image source={require('../../assets/search.png')} style={styles.drawerIcon} />}
+      />
+      <DrawerItem
+        label="Settings"
+        onPress={() => navigation.navigate('Settings')}
+        icon={() => <Image source={require('../../assets/search.png')} style={styles.drawerIcon} />}
+      />
+
+      {/* Include default items */}
+      <DrawerItemList {...props} />
+      <DrawerItem label="Close Drawer" onPress={() => navigation.closeDrawer()} />
+    </DrawerContentScrollView>
+  );
+};
+
+const Drawer = createDrawerNavigator();
+
+const BottomTabs = ({ icons }) => {
+  const [activeTab, setActiveTab] = useState('Home');
+
+  const Icon = ({ icon }) => (
+    <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
+      <Image
+        source={activeTab == icon.name ? icon.active : icon.inactive}
+        style={[
+          styles.icon,
+          icon.name == 'Profile' ? styles.profilePic() : null,
+          activeTab == 'Profile' && icon.name == activeTab ? styles.profilePic(activeTab) : null,
+        ]}
+      />
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.wrapper}>
+      <Divider width={1} orientation="vertical" />
+      <View style={styles.container}>
+        {icons.map((icon, index) => (
+          <Icon key={index} icon={icon} />
+        ))}
+      </View>
+
+      {/* Drawer Navigation */}
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+        <Drawer.Screen name="Home" component={YourHomeScreenComponent} />
+        {/* Add additional screens */}
+        <Drawer.Screen name="UserProfile" component={UserProfile} />
+        <Drawer.Screen name="Clubs" component={Clubs} />
+        <Drawer.Screen name="Saved" component={Saved} />
+        <Drawer.Screen name="Activity" component={Activity} />
+        <Drawer.Screen name="Settings" component={Settings} />
+      </Drawer.Navigator>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  wrapper: {
+    position: 'absolute',
+    width: '100%',
+    bottom: '0%',
+    zIndex: 999,
+    backgroundColor: 'white',
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    margin: 2,
+    height: 50,
+    paddingTop: 2,
+  },
+  icon: {
+    borderRadius: 10,
+    width: 30,
+    height: 30,
+    margin: 10,
+  },
+  profilePic: (activeTab = '') => ({
+    borderRadius: 50,
+    borderWidth: activeTab == 'Profile' ? 2 : 0,
+    borderColor: 'black',
+  }),
+  drawerIcon: {
+    width: 24,
+    height: 24,
+  },
+});
+
+export default BottomTabs;
